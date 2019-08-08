@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="recycler_view" type="id"/>
+    <item name="loading_view" type="id" />
+    <item name="home_content" type="id" />
+    <item name="coordinator" type="id" />
+    <item name="app_bar_layout" type="id" />
+    <item name="toolbar" type="id" />
+    <item name="str_layout" type="id" />
+</resources>

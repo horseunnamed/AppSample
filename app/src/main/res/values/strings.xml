@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AppSample</string>
+    <string name="action_retry">Retry</string>
+
+    <string name="home_menu_search">Doggos</string>
+    <string name="home_menu_favorites">Favs</string>
+
+    <string name="img_search_reset_breed">Show any breed</string>
+    <string name="img_search_select_breed">Select dog breed</string>
+    <string name="img_search_order">Order</string>
+    <string name="img_search_type">Type</string>
+
+    <string name="breed_search_title">Breed search</string>
+    <string name="breed_search_hint">Type breed name…</string>
+    <string name="breed_search_empty">No such breed found!</string>
+</resources>
