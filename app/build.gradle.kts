@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.debugImplementation
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -30,6 +28,38 @@ android {
     }
     androidExtensions {
         isExperimental = true
+    }
+}
+
+val localScreenshotsDir = "$buildDir/screenshots/"
+val deviceScreenshotsDir = "/sdcard/Pictures/appsample/"
+
+tasks {
+
+    val clearScreenshotsOnDeviceTask by registering(Exec::class) {
+        executable = android.adbExecutable.toString()
+        args = listOf("shell", "rm", "-r", deviceScreenshotsDir)
+    }
+
+    val createDeviceScreenshotsDir by registering(Exec::class) {
+        executable = android.adbExecutable.toString()
+        args = listOf("shell", "mkdir", "-p", deviceScreenshotsDir)
+    }
+
+    val fetchScreenshotsTask by registering(Exec::class) {
+        executable = android.adbExecutable.toString()
+        args = listOf("pull", "$deviceScreenshotsDir./", localScreenshotsDir)
+        finalizedBy(clearScreenshotsOnDeviceTask)
+        dependsOn(createDeviceScreenshotsDir)
+        doFirst {
+            File(localScreenshotsDir).mkdirs()
+        }
+    }
+
+    whenTaskAdded {
+        if (name == "connectedDebugAndroidTest") {
+            finalizedBy(fetchScreenshotsTask)
+        }
     }
 }
 

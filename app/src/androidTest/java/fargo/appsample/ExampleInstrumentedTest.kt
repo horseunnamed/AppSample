@@ -1,5 +1,6 @@
 package fargo.appsample
 
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -20,15 +21,30 @@ class ExampleInstrumentedTest {
     @get:Rule
     var activityScenarioRule = ActivityScenarioRule(AppActivity::class.java)
 
-    @Before
-    fun before() {
+    private val okhttpIdlingRes by lazy {
         val client = Toothpick.openScope(DI.APP_SCOPE).getInstance(OkHttpClient::class.java)
-        val idlingRes = OkHttp3IdlingResource.create("OkHttp", client)
-        IdlingRegistry.getInstance().register(idlingRes)
+        OkHttp3IdlingResource.create("OkHttp", client)
+    }
+
+    @Before
+    fun beforeAll() {
+        IdlingRegistry.getInstance().let {
+            if (!it.resources.contains(okhttpIdlingRes)) {
+                it.register(okhttpIdlingRes)
+            }
+        }
     }
 
     @Test
     fun showListOfDoggosAtStart() {
         onView(withId(R.id.recycler_view)).check(adapterHasCount(10))
+    }
+
+    @Test
+    fun screenshotTest() {
+        // onView(withId(R.id.recycler_view)).check(adapterHasCount(10))
+        Espresso.onIdle()
+        Thread.sleep(200)
+        takeScreenshot("first_screen.png")
     }
 }
