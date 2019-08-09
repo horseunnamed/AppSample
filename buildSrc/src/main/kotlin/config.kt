@@ -19,6 +19,8 @@ object Lib {
     const val recyclerView = "androidx.recyclerview:recyclerview:1.1.0-alpha05"
     const val lifecycle = "androidx.lifecycle:lifecycle-extensions:2.0.0"
     const val lifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha01"
+    const val fragment = "androidx.fragment:fragment:1.2.0-alpha02"
+    const val fragmentTesting = "androidx.fragment:fragment-testing:1.2.0-alpha02"
 
     // Logging:
     const val timber = "com.jakewharton.timber:timber:4.7.1"
@@ -53,10 +55,11 @@ object Lib {
 
     // Testing:
     const val junit = "junit:junit:4.12"
-    const val androidTestCore = "androidx.test:core:1.2.1-alpha02"
-    const val androidTestRunner = "androidx.test:runner:1.3.0-alpha02"
-    const val androidTestJunit = "androidx.test.ext:junit:1.1.2-alpha02"
-    const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
+    const val androidTestCore = "androidx.test:core:1.2.0"
+    const val androidTestRunner = "androidx.test:runner:1.1.0"
+    const val androidTestJunit = "androidx.test.ext:junit:1.1.0"
+    const val mockito = "org.mockito:mockito-android:3.0.0"
+    const val espresso = "androidx.test.espresso:espresso-core:3.1.0"
     const val espressoIdlingRes = "androidx.test.espresso:espresso-idling-resource:3.2.0"
     const val okHttpIdlingRes = "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0"
 }

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -29,6 +31,10 @@ android {
     androidExtensions {
         isExperimental = true
     }
+    kotlinOptions {
+        val options = this as KotlinJvmOptions
+        options.jvmTarget = "1.8"
+    }
 }
 
 val localScreenshotsDir = "$buildDir/screenshots/"
@@ -57,7 +63,7 @@ tasks {
     }
 
     whenTaskAdded {
-        if (name == "connectedDebugAndroidTest") {
+        if (name == "connectedAndroidTest") {
             finalizedBy(fetchScreenshotsTask)
         }
     }
@@ -74,6 +80,8 @@ dependencies {
     implementation(Lib.recyclerView)
     implementation(Lib.lifecycle)
     implementation(Lib.lifecycleKtx)
+    implementation(Lib.fragment)
+    debugImplementation(Lib.fragmentTesting)
 
     // Logging:
     implementation(Lib.timber)
@@ -112,9 +120,10 @@ dependencies {
 
     // Testing:
     testImplementation(Lib.junit)
-    androidTestImplementation(Lib.androidTestCore)
+    // androidTestImplementation(Lib.androidTestCore)
     androidTestImplementation(Lib.androidTestRunner)
     androidTestImplementation(Lib.androidTestJunit)
+    androidTestImplementation(Lib.mockito)
     androidTestImplementation(Lib.espresso)
     androidTestImplementation(Lib.espressoIdlingRes)
     androidTestImplementation(Lib.okHttpIdlingRes)
